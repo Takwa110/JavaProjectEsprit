@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.esprit.projets.UserController">
+    <ScrollPane fitToWidth="true" fitToHeight="true"
+                AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+                AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <VBox spacing="10" style="-fx-padding: 10;">
+            <Label styleClass="title-label" text="Cours disponibles" />
+            <TableView fx:id="tableCourses" prefHeight="200">
+                <columns>
+                    <TableColumn fx:id="colCourse" text="Cours" />
+                    <TableColumn fx:id="colLikes" text="J'aime" />
+                    <TableColumn fx:id="colAction" text="Action" />
+                </columns>
+            </TableView>
+            <HBox spacing="10">
+                <Button text="Retour" onAction="#goBack" styleClass="small-button"/>
+                <TextArea fx:id="commentTextArea" promptText="Ajouter un commentaire..."
+                          wrapText="true" HBox.hgrow="ALWAYS" prefHeight="80"/>
+                <Button fx:id="submitCommentButton" onAction="#submitComment"
+                        text="Envoyer commentaire" styleClass="small-button"/>
+            </HBox>
+            <Label styleClass="title-label" text="Commentaires" />
+            <TableView fx:id="tableComments" prefHeight="300">
+                <columns>
+                    <TableColumn fx:id="colUser" text="Utilisateur" />
+                    <TableColumn fx:id="colComment" text="Commentaire" />
+                    <TableColumn fx:id="colActions" text="Actions" />
+                </columns>
+            </TableView>
+        </VBox>
+    </ScrollPane>
+</AnchorPane>

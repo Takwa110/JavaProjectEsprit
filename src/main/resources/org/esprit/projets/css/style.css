@@ -1,0 +1,83 @@
+.root {
+    -fx-background-color: #f4f4f4;
+}
+
+.label {
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+}
+
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 8px;
+    -fx-padding: 10px;
+}
+
+/* styles.css */
+.lovely-button {
+    -fx-background-color: #ff6f61;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-padding: 8px 16px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-weight: bold;
+}
+.lovely-button:hover {
+    -fx-background-color: #ff3b2f;
+}
+.title-label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+/* Navigation buttons (e.g., on the left side) */
+.nav-button {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-background-color: #1ABC9C;
+    -fx-text-fill: white;
+    -fx-padding: 4 8 4 8;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-min-width: 180px; /* Ensures buttons are wide */
+}
+
+.nav-button:hover {
+    -fx-background-color: #16A085;
+}
+
+/* Generic button styling (overriding defaults if needed) */
+.button {
+    -fx-font-size: 12px;
+    -fx-padding: 4 8 4 8;
+    -fx-background-radius: 5;
+}
+
+/* Additional style for specific buttons (e.g., for editing actions) */
+.lovely-button {
+    -fx-background-color: #3498DB;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-background-radius: 5;
+    -fx-padding: 4 8 4 8;
+}
+.lovely-button:hover {
+    -fx-background-color: #2980B9;
+}
+/* Style for small buttons */
+.small-button {
+    -fx-font-size: 12px;
+    -fx-font-weight: normal;
+    -fx-background-color: #1ABC9C;
+    -fx-text-fill: white;
+    -fx-padding: 5 10 5 10;
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
+}
+
+/* Title label styling (if not already defined) */
+.title-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}

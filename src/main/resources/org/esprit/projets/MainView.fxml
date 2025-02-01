@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.esprit.projets.MainController" stylesheets="@css/style.css">
+    <top>
+        <HBox style="-fx-background-color: #2C3E50; -fx-padding: 10;" alignment="CENTER">
+            <Label text="Système d'évaluation des cours"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+        </HBox>
+    </top>
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #34495E; -fx-padding: 15;" prefWidth="200">
+            <Button text="Vue Admin" onAction="#goToAdminView" styleClass="nav-button"/>
+            <Button text="Vue Utilisateur" onAction="#goToUserView" styleClass="nav-button"/>
+        </VBox>
+    </left>
+    <center>
+        <AnchorPane fx:id="centerPane" />
+    </center>
+</BorderPane>
