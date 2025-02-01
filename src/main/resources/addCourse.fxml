@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddCourseController">
+   <children>
+      <Label text="Add New Course"/>
+
+      <HBox spacing="5">
+         <Label text="Title:"/>
+         <TextField fx:id="titleField" promptText="Enter course title"/>
+      </HBox>
+
+      <HBox spacing="5">
+         <Label text="Description:"/>
+         <TextField fx:id="descriptionField" promptText="Enter course description"/>
+      </HBox>
+
+      <Button fx:id="selectPdfButton" text="Select PDF" onAction="#handleSelectPDF"/>
+      <Label fx:id="pdfPathLabel" text="No PDF selected"/>
+
+      <Button fx:id="addCourseButton" text="Add Course" onAction="#handleAddCourse"/>
+   </children>
+</VBox>
