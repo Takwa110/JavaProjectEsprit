@@ -23,10 +23,10 @@ public class CommentaireService {
     public List<Commentaire> getAllComments() throws SQLException {
         List<Commentaire> commentaires = new ArrayList<>();
         String query = "SELECT commentaires.*, " +
-                "cours.nom AS courseName, " +
+                "course.title AS courseName, " +
                 "utilisateur.email AS userEmail " +
                 "FROM commentaires " +
-                "JOIN cours ON cours.id = commentaires.cours_id " +
+                "JOIN course ON course.id = commentaires.cours_id " +
                 "JOIN utilisateur ON utilisateur.id = commentaires.utilisateur_id";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             ResultSet rs = stmt.executeQuery();
@@ -49,10 +49,10 @@ public class CommentaireService {
     public List<Commentaire> getCommentairesByCours(int idCours) throws SQLException {
         List<Commentaire> commentaires = new ArrayList<>();
         String query = "SELECT commentaires.*, " +
-                "cours.nom AS courseName, " +
+                "course.title AS courseName, " +
                 "utilisateur.email AS userEmail " +
                 "FROM commentaires " +
-                "JOIN cours ON cours.id = commentaires.cours_id " +
+                "JOIN course ON course.id = commentaires.cours_id " +
                 "JOIN utilisateur ON utilisateur.id = commentaires.utilisateur_id"+
                   " WHERE cours_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {

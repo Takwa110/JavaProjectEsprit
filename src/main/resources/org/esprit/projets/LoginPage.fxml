@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.esprit.projets.Controllers.LoginController">
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+    </rowConstraints>
+    <children>
+        <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #eceff4; -fx-background-radius: 12; -fx-border-color: white;">
+            <children>
+                <AnchorPane layoutY="-5.0" prefHeight="794.0" prefWidth="396.0" style="-fx-background-color: #2e3440;">
+                    <children>
+                        <ImageView fitHeight="228.0" fitWidth="226.0" layoutX="92.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Images/Logo_ESPRIT_Ariana.jpg" />
+                            </image>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </ImageView>
+                        <Label layoutX="57.0" layoutY="406.0" text="Esprit Cours " textFill="WHITE">
+                            <font>
+                                <Font name="Manjari Bold" size="25.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Label>
+                    </children>
+                </AnchorPane>
+                <AnchorPane layoutX="578.0" layoutY="122.0" opacity="0.7" prefHeight="596.0" prefWidth="516.0" style="-fx-background-color: #4c566a; -fx-background-radius: 20;">
+                    <children>
+                        <Label layoutX="202.0" layoutY="66.0" text="Login" textFill="WHITE">
+                            <font>
+                                <Font name="Manjari Regular" size="50.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Label>
+                        <TextField fx:id="emailField" layoutX="121.0" layoutY="268.0" onKeyReleased="#handleKeyReleased" prefHeight="32.0" prefWidth="324.0" promptText="Email" style="-fx-background-radius: 10;">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                            <effect>
+                                <DropShadow height="0.0" radius="4.75" />
+                            </effect>
+                        </TextField>
+                        <PasswordField fx:id="passwordField" layoutX="119.0" layoutY="361.0" onKeyReleased="#handleKeyReleased" prefHeight="28.0" prefWidth="330.0" promptText="Password" style="-fx-background-radius: 10;">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                            <effect>
+                                <DropShadow height="11.89" radius="7.7225" />
+                            </effect>
+                        </PasswordField>
+                        <Label layoutX="123.0" layoutY="234.0" prefHeight="31.0" prefWidth="261.0" text="User Email" textFill="WHITE">
+                            <font>
+                                <Font name="Manjari Regular" size="23.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Label>
+                        <Label layoutX="121.0" layoutY="324.0" prefHeight="31.0" prefWidth="261.0" text="Password" textFill="WHITE">
+                            <font>
+                                <Font name="Manjari Regular" size="23.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Label>
+
+                        <!-- Boutons correctement positionnés -->
+                        <Button fx:id="loginButton" layoutX="120.0" layoutY="461.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="46.0" prefWidth="324.0" style="-fx-background-color: #8fbcbb; -fx-background-radius: 16;" text="Login" textFill="WHITE">
+                            <font>
+                                <Font name="Manjari Bold" size="16.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Button>
+
+                        <!-- Bouton pour réinitialiser le mot de passe avec un bon positionnement -->
+                        <Button fx:id="forgotPasswordButton" text="Réinitialiser le mot de passe" onAction="#handleForgotPasswordAction" layoutX="120.0" layoutY="525.0" prefHeight="46.0" prefWidth="324.0" style="-fx-background-color: #d08770; -fx-background-radius: 16;" textFill="WHITE">
+                            <font>
+                                <Font name="Manjari Bold" size="16.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Button>
+
+                        <Button layoutX="120.0" layoutY="590.0" mnemonicParsing="false" onAction="#handleCreateAccountButtonAction" prefHeight="46.0" prefWidth="324.0" style="-fx-background-color: #d08770; -fx-background-radius: 16;" text="Créer un compte" textFill="WHITE">
+                            <font>
+                                <Font name="Manjari Bold" size="16.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Button>
+
+                        <Label fx:id="error" layoutX="124.0" layoutY="414.0" prefHeight="31.0" prefWidth="324.0" textFill="RED">
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                            <font>
+                                <Font name="Manjari Bold" size="20.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </children>
+</GridPane>

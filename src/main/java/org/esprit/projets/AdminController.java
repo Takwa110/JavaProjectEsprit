@@ -8,7 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableRow;
 import javafx.util.Callback;
 import org.esprit.projets.entity.Commentaire;
-import org.esprit.projets.entity.Cours;
+import org.esprit.projets.entity.Course;
 import org.esprit.projets.services.CommentaireService;
 import org.esprit.projets.services.LikesService;
 
@@ -28,10 +28,10 @@ public class AdminController {
     @FXML private TableColumn<Commentaire, Void> colActions;
 
     // Likes Table
-    @FXML private TableView<Cours> tableLikes;
-    @FXML private TableColumn<Cours, String> colCourseLikes;
-    @FXML private TableColumn<Cours, Integer> colLikes;
-    @FXML private TableColumn<Cours, Void> colActionsLikes;
+    @FXML private TableView<Course> tableLikes;
+    @FXML private TableColumn<Course, String> colCourseLikes;
+    @FXML private TableColumn<Course, Integer> colLikes;
+    @FXML private TableColumn<Course, Void> colActionsLikes;
 
     // Filter Buttons
     @FXML private Button resetFilterButton;
@@ -86,7 +86,7 @@ public class AdminController {
         });
 
         // Setup likes table columns
-        colCourseLikes.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        colCourseLikes.setCellValueFactory(new PropertyValueFactory<>("title"));
         colLikes.setCellValueFactory(new PropertyValueFactory<>("likes"));
 
         // Constrained resize for tableLikes
@@ -124,15 +124,15 @@ public class AdminController {
     }
 
     private void addFilterButtonToLikes() {
-        Callback<TableColumn<Cours, Void>, TableCell<Cours, Void>> cellFactory = new Callback<>() {
+        Callback<TableColumn<Course, Void>, TableCell<Course, Void>> cellFactory = new Callback<>() {
             @Override
-            public TableCell<Cours, Void> call(final TableColumn<Cours, Void> param) {
-                return new TableCell<Cours, Void>() {
+            public TableCell<Course, Void> call(final TableColumn<Course, Void> param) {
+                return new TableCell<Course, Void>() {
                     private final Button btnFilter = new Button("Filtrer");
                     {
                         btnFilter.setOnAction(event -> {
-                            Cours cours = getTableView().getItems().get(getIndex());
-                            filterCommentsByCourse(cours.getNom());
+                            Course course = getTableView().getItems().get(getIndex());
+                            filterCommentsByCourse(course.getTitle());
                         });
                     }
                     @Override
@@ -168,13 +168,10 @@ public class AdminController {
     }
 
     private void loadLikes() {
-        try {
-            List<Cours> courses = likeService.getCoursesWithLikes();
-            ObservableList<Cours> observableList = FXCollections.observableArrayList(courses);
+
+            List<Course> courses = likeService.getCoursesWithLikes();
+            ObservableList<Course> observableList = FXCollections.observableArrayList(courses);
             tableLikes.setItems(observableList);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     private void deleteComment(Commentaire comment) {

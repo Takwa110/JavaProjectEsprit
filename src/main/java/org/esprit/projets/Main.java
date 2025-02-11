@@ -11,7 +11,7 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("MainView.fxml"));
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("LoginPage.fxml"));
         Pane root = loader.load();
         Scene scene = new Scene(root);
         // Load the stylesheet (ensure the path is correct)

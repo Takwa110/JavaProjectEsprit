@@ -32,19 +32,32 @@ public class MainController {
 
     @FXML
     public void initialize() {
-        // Load a default view (AdminView)
-        loadUI("AdminView.fxml");
+        loadUI("DashboardView.fxml");
+    }
+
+    @FXML
+    public void goToEnseignantDashboard(ActionEvent event) {
+        loadUI("EnseignantDashboard.fxml");
+    }
+    @FXML
+    public void goToAdminDashboard(ActionEvent event) {
+        loadUI("AdminDashboard.fxml");
     }
 
     @FXML
     public void goToAdminView(ActionEvent event) {
-        loadUI("AdminView.fxml");
+        loadUI("DashboardView.fxml");
     }
-
     @FXML
     public void goToUserView(ActionEvent event) {
         loadUI("UserView.fxml");
     }
+
+    @FXML
+    public void goToEtudiantDashboard(ActionEvent event) {
+        loadUI("EtudiantDashboard.fxml");
+    }
+
 
     // Optionally, a method to completely switch scenes if needed:
     public void switchScene(ActionEvent event, String fxmlFile) throws IOException {

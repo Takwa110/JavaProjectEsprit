@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.esprit.projets.Controllers.DashboardController">
+    <top>
+        <HBox spacing="10" alignment="CENTER" style="-fx-background-color: #2C3E50; -fx-padding: 10;">
+            <Label text="Dashboard - gestion de cours, commentaire et like" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+        </HBox>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true">
+            <VBox spacing="20" style="-fx-padding: 10;">
+                <VBox spacing="10">
+                    <Label text="Course Management" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <TableView fx:id="courseTableView" prefHeight="250" prefWidth="800">
+                        <columns>
+                            <TableColumn fx:id="idColumn" text="ID" />
+                            <TableColumn fx:id="titleColumn" text="Title" />
+                            <TableColumn fx:id="descriptionColumn" text="Description" />
+                            <TableColumn fx:id="instructorColumn" text="Instructor" />
+                            <TableColumn fx:id="pdfPathColumn" text="PDF Path" />
+                            <TableColumn fx:id="likesColumn" text="Likes" />
+                            <TableColumn fx:id="actionColumn" text="Action" />
+                        </columns>
+                    </TableView>
+                    <HBox spacing="10">
+                        <TextField fx:id="titleField" promptText="Course Title" />
+                        <TextField fx:id="descriptionField" promptText="Course Description" />
+                        <TextField fx:id="instructorField" promptText="Instructor" />
+                        <TextField fx:id="pdfPathField" promptText="PDF Path" editable="false"/>
+                        <Button fx:id="chooseFileButton" text="Choose PDF" />
+                    </HBox>
+                    <HBox spacing="10">
+                        <Button fx:id="addCourseButton" text="Add Course" />
+                        <Button fx:id="deleteCourseButton" text="Delete Course" />
+                        <Button fx:id="updateCourseButton" text="Update Course" />
+                        <Button fx:id="exportPdfButton" text="Export PDF" />
+                    </HBox>
+                </VBox>
+                <VBox spacing="10">
+                    <Label text="Comments and Likes" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <HBox spacing="10">
+                        <Button fx:id="resetFilterButton" text="Reset Filter" />
+                        <Button fx:id="filterBadWordsButton" text="Filter by Bad Words" />
+                    </HBox>
+                    <TableView fx:id="tableComments" prefHeight="200" prefWidth="800">
+                        <columns>
+                            <TableColumn fx:id="colCourse" text="Course" />
+                            <TableColumn fx:id="colUser" text="User" />
+                            <TableColumn fx:id="colComment" text="Comment" />
+                            <TableColumn fx:id="colDate" text="Date" />
+                            <TableColumn fx:id="colActions" text="Actions" />
+                        </columns>
+                    </TableView>
+                    <TableView fx:id="tableLikes" prefHeight="200" prefWidth="800">
+                        <columns>
+                            <TableColumn fx:id="colCourseLikes" text="Course" />
+                            <TableColumn fx:id="colLikes" text="Likes" />
+                            <TableColumn fx:id="colActionsLikes" text="Actions" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

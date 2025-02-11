@@ -16,7 +16,9 @@
     </top>
     <left>
         <VBox spacing="10" style="-fx-background-color: #34495E; -fx-padding: 15;" prefWidth="200">
-            <Button text="Tous les cours" onAction="#goToUserView" styleClass="nav-button"/>
+            <Button text="AdminDashboard" onAction="#goToAdminDashboard" styleClass="nav-button"/>
+            <Button text="Vue Admin" onAction="#goToAdminView" styleClass="nav-button"/>
+            <Button text="Vue Utilisateur" onAction="#goToUserView" styleClass="nav-button"/>
         </VBox>
     </left>
     <center>

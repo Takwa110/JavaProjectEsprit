@@ -16,15 +16,18 @@
                 AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
         <VBox spacing="10" style="-fx-padding: 10;">
             <Label styleClass="title-label" text="Cours disponibles" />
-            <TableView fx:id="tableCourses" prefHeight="200">
+            <TableView fx:id="tableCourses" prefHeight="300">
                 <columns>
-                    <TableColumn fx:id="colCourse" text="Cours" />
-                    <TableColumn fx:id="colLikes" text="J'aime" />
-                    <TableColumn fx:id="colAction" text="Action" />
+                    <TableColumn fx:id="idColumn" text="ID" />
+                    <TableColumn fx:id="titleColumn" text="Title" />
+                    <TableColumn fx:id="descriptionColumn" text="Description" />
+                    <TableColumn fx:id="instructorColumn" text="Instructor" />
+                    <TableColumn fx:id="pdfPathColumn" text="PDF Path" />
+                    <TableColumn fx:id="likesColumn" text="Likes" />
+                    <TableColumn fx:id="actionColumn" text="Action" />
                 </columns>
             </TableView>
             <HBox spacing="10">
-                <Button text="Retour" onAction="#goBack" styleClass="small-button"/>
                 <TextArea fx:id="commentTextArea" promptText="Ajouter un commentaire..."
                           wrapText="true" HBox.hgrow="ALWAYS" prefHeight="80"/>
                 <Button fx:id="submitCommentButton" onAction="#submitComment"
