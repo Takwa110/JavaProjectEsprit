@@ -53,6 +53,7 @@ public class CreateAccountController {
         });
     }
 
+
     @FXML
     protected void handleCreateAccountButtonAction(ActionEvent event) {
         String nom = nomField.getText();
@@ -66,6 +67,18 @@ public class CreateAccountController {
             // Validation des champs
             if (nom.isEmpty() || email.isEmpty() || motDePasse.isEmpty() || role == null) {
                 showAlert("Erreur", "Tous les champs sont obligatoires !");
+                return;
+            }
+
+            // Validation email
+            if (!isValidEmail(email)) {
+                showAlert("Erreur", "Veuillez entrer un email valide !");
+                return;
+            }
+
+            // Validation mot de passe
+            if (!isValidPassword(motDePasse)) {
+                showAlert("Erreur", "Le mot de passe doit contenir au moins 6 caractères et un chiffre !");
                 return;
             }
 
@@ -120,6 +133,13 @@ public class CreateAccountController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return email.matches(emailRegex);
+    }
+    private boolean isValidPassword(String password) {
+        return password.length() >= 6 && password.matches(".*\\d.*");
     }
 
     private void showAlert(String title, String message) {

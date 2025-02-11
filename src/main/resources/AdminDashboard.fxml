@@ -1,19 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableCell?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.paint.Color?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminDashboardController">
-    <TableView fx:id="tableView" prefHeight="400" prefWidth="600">
-        <columns>
-            <TableColumn fx:id="colNom" text="Nom" />
-            <TableColumn fx:id="colEmail" text="Email" />
-            <TableColumn fx:id="colRole" text="Rôle" />
-            <TableColumn fx:id="colAction" text="Actions" />
-        </columns>
-    </TableView>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminDashboardController" style="-fx-background-color: #eceff4; -fx-background-radius: 12; -fx-border-color: white;">
+    <!-- Menu latéral -->
+    <left>
+        <VBox prefWidth="250" spacing="20" alignment="CENTER" style="-fx-background-color: #2e3440; -fx-background-radius: 12;">
+            <children>
+                <ImageView fitWidth="120" fitHeight="120" preserveRatio="true">
+                    <image>
+                        <Image url="@Images/Logo_ESPRIT_Ariana.jpg"/>
+                    </image>
+                    <effect>
+                        <DropShadow radius="10" offsetX="5" offsetY="5" color="rgba(0, 0, 0, 0.3)"/>
+                    </effect>
+                </ImageView>
+                <Label text="Admin Dashboard" textFill="WHITE" style="-fx-font-size: 24px; -fx-font-weight: bold;">
+                    <effect>
+                        <DropShadow radius="5" offsetX="3" offsetY="3" color="rgba(0, 0, 0, 0.3)"/>
+                    </effect>
+                </Label>
+                <Button text="Utilisateurs" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;" />
+                <Button text="Paramètres" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;" />
+                <Button text="Déconnexion" fx:id="btnLogout" style="-fx-background-color: #d08770; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 10;">
+                    <effect>
+                        <DropShadow radius="5" offsetX="3" offsetY="3" color="rgba(0, 0, 0, 0.3)"/>
+                    </effect>
+                </Button>
+            </children>
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+        </VBox>
+    </left>
 
-    <Button text="Ajouter un utilisateur" fx:id="btnAjouter" />
-</VBox>
+    <!-- Zone principale -->
+    <center>
+        <VBox spacing="25" alignment="CENTER" style="-fx-background-color: #4c566a; -fx-background-radius: 20;" prefWidth="800">
+            <children>
+                <Label text="Gestion des Utilisateurs" textFill="WHITE" style="-fx-font-size: 28px; -fx-font-weight: bold;">
+                    <effect>
+                        <DropShadow radius="5" offsetX="3" offsetY="3" color="rgba(0, 0, 0, 0.3)"/>
+                    </effect>
+                </Label>
+                <TableView fx:id="tableView" prefHeight="400" prefWidth="800">
+                    <columns>
+                        <TableColumn fx:id="colNom" text="Nom" prefWidth="200"/>
+                        <TableColumn fx:id="colEmail" text="Email" prefWidth="250"/>
+                        <TableColumn fx:id="colRole" text="Rôle" prefWidth="150"/>
+                        <TableColumn fx:id="colAction" text="Actions" prefWidth="200"/>
+                    </columns>
+                    <effect>
+                        <DropShadow radius="8" offsetX="4" offsetY="4" color="rgba(0, 0, 0, 0.2)"/>
+                    </effect>
+                </TableView>
+                <Button text="Ajouter un utilisateur" fx:id="btnAjouter" style="-fx-background-color: #8fbcbb; -fx-text-fill: white; -fx-font-size: 18px; -fx-background-radius: 12; -fx-padding: 10;">
+                    <effect>
+                        <DropShadow radius="5" offsetX="3" offsetY="3" color="rgba(0, 0, 0, 0.3)"/>
+                    </effect>
+                </Button>
+            </children>
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+        </VBox>
+    </center>
+</BorderPane>

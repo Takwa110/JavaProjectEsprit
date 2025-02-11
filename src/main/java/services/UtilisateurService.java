@@ -170,4 +170,24 @@ public class UtilisateurService implements IService<Utilisateur> {
         }
         return null;
     }
+    public void saveResetToken(String email, String resetToken) throws SQLException {
+        // Vérifier si l'email existe
+        String query = "SELECT * FROM utilisateur WHERE email = ?";
+        PreparedStatement pst = con.prepareStatement(query);
+        pst.setString(1, email);
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            // Si l'utilisateur existe, insérer le token de réinitialisation dans la table utilisateur
+            String updateQuery = "UPDATE utilisateur SET reset_token = ? WHERE email = ?";
+            PreparedStatement updatePst = con.prepareStatement(updateQuery);
+            updatePst.setString(1, resetToken);
+            updatePst.setString(2, email);
+            updatePst.executeUpdate();
+            System.out.println("Token de réinitialisation enregistré avec succès.");
+        } else {
+            System.out.println("Aucun utilisateur trouvé avec cet email.");
+        }
+    }
+
 }

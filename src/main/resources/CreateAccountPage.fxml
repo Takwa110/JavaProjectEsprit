@@ -1,29 +1,156 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Pos?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateAccountController">
-    <GridPane hgap="10" vgap="10">
-        <Label text="Nom:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-        <TextField fx:id="nomField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+<GridPane alignment="CENTER" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateAccountController">
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+    </rowConstraints>
+    <children>
+        <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #eceff4; -fx-background-radius: 12; -fx-border-color: white;">
+            <children>
+                <AnchorPane layoutY="-5.0" prefHeight="794.0" prefWidth="396.0" style="-fx-background-color: #2e3440;">
+                    <children>
+                        <ImageView fitHeight="228.0" fitWidth="226.0" layoutX="92.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Images/Logo_ESPRIT_Ariana.jpg" />
+                            </image>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </ImageView>
+                        <Label layoutX="57.0" layoutY="406.0" text="Esprit Cours " textFill="WHITE">
+                            <font>
+                                <Font name="Manjari Bold" size="25.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Label>
+                    </children>
+                </AnchorPane>
+                <AnchorPane layoutX="578.0" layoutY="122.0" opacity="0.7" prefHeight="596.0" prefWidth="516.0" style="-fx-background-color: #4c566a; -fx-background-radius: 20;">
+                    <children>
+                        <Label layoutX="202.0" layoutY="66.0" text="Créer un compte" textFill="WHITE">
+                            <font>
+                                <Font name="Manjari Regular" size="50.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Label>
+                        <Label layoutX="123.0" layoutY="174.0" text="Nom" textFill="WHITE">
+                            <font>
+                                <Font name="Manjari Regular" size="23.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Label>
+                        <TextField fx:id="nomField" layoutX="121.0" layoutY="211.0" prefHeight="32.0" prefWidth="324.0" style="-fx-background-radius: 10;" promptText="Nom">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                            <effect>
+                                <DropShadow height="0.0" radius="4.75" />
+                            </effect>
+                        </TextField>
 
-        <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-        <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <Label layoutX="123.0" layoutY="262.0" text="Email" textFill="WHITE">
+                            <font>
+                                <Font name="Manjari Regular" size="23.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Label>
+                        <TextField fx:id="emailField" layoutX="121.0" layoutY="299.0" prefHeight="32.0" prefWidth="324.0" style="-fx-background-radius: 10;" promptText="Email">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                            <effect>
+                                <DropShadow height="0.0" radius="4.75" />
+                            </effect>
+                        </TextField>
 
-        <Label text="Mot de passe:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <Label layoutX="123.0" layoutY="350.0" text="Mot de passe" textFill="WHITE">
+                            <font>
+                                <Font name="Manjari Regular" size="23.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Label>
+                        <PasswordField fx:id="passwordField" layoutX="121.0" layoutY="387.0" prefHeight="32.0" prefWidth="324.0" style="-fx-background-radius: 10;" promptText="Mot de passe">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                            <effect>
+                                <DropShadow height="0.0" radius="4.75" />
+                            </effect>
+                        </PasswordField>
 
-        <Label text="Rôle:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-        <ComboBox fx:id="roleComboBox" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        <Label layoutX="123.0" layoutY="438.0" text="Rôle" textFill="WHITE">
+                            <font>
+                                <Font name="Manjari Regular" size="23.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Label>
+                        <ComboBox fx:id="roleComboBox" layoutX="121.0" layoutY="475.0" prefHeight="32.0" prefWidth="324.0" style="-fx-background-radius: 10;" promptText="Sélectionner un rôle" />
 
-        <Label text="Spécialité (si enseignant):" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-        <TextField fx:id="specialiteField" GridPane.columnIndex="1" GridPane.rowIndex="4" disable="true"/>
+                        <Label layoutX="123.0" layoutY="526.0" text="Spécialité (si enseignant)" textFill="WHITE">
+                            <font>
+                                <Font name="Manjari Regular" size="23.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Label>
+                        <TextField fx:id="specialiteField" layoutX="121.0" layoutY="563.0" prefHeight="32.0" prefWidth="324.0" style="-fx-background-radius: 10;" disable="true" promptText="Spécialité" />
 
-        <Label text="Niveau (si étudiant):" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-        <TextField fx:id="niveauField" GridPane.columnIndex="1" GridPane.rowIndex="5" disable="true"/>
-    </GridPane>
+                        <Label layoutX="123.0" layoutY="614.0" text="Niveau (si étudiant)" textFill="WHITE">
+                            <font>
+                                <Font name="Manjari Regular" size="23.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Label>
+                        <TextField fx:id="niveauField" layoutX="121.0" layoutY="651.0" prefHeight="32.0" prefWidth="324.0" style="-fx-background-radius: 10;" disable="true" promptText="Niveau" />
 
-    <Button text="Créer un compte" onAction="#handleCreateAccountButtonAction"/>
-    <Button text="Retour" onAction="#handleBackButtonAction"/>
-</VBox>
+                        <Button text="Créer un compte" layoutX="121.0" layoutY="694.0" prefHeight="46.0" prefWidth="324.0" style="-fx-background-color: #8fbcbb; -fx-background-radius: 16;" onAction="#handleCreateAccountButtonAction">
+                            <font>
+                                <Font name="Manjari Bold" size="16.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Button>
+
+                        <Button text="Retour" layoutX="121.0" layoutY="755.0" prefHeight="46.0" prefWidth="324.0" style="-fx-background-color: #d08770; -fx-background-radius: 16;" onAction="#handleBackButtonAction">
+                            <font>
+                                <Font name="Manjari Bold" size="16.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Button>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </children>
+</GridPane>
