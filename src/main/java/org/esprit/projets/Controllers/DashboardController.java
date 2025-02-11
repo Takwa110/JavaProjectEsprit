@@ -11,6 +11,7 @@ import javafx.util.Callback;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.esprit.projets.entity.Course;
 import org.esprit.projets.entity.Commentaire;
@@ -324,82 +325,212 @@ public class DashboardController {
 
     private void exportPdf() {
         PDDocument document = new PDDocument();
-        float margin = 50, yStart = 750, lineHeight = 20;
         try {
-            for(Course course : coursesList) {
-                PDPage page = new PDPage();
-                document.addPage(page);
-                PDPageContentStream contentStream = new PDPageContentStream(document, page);
-                float y = yStart;
-                contentStream.beginText();
-                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
-                contentStream.newLineAtOffset(margin, y);
-                String courseHeader = "Course: " + course.getTitle() + " | Likes: " + course.getLikes();
-                contentStream.showText(courseHeader);
-                contentStream.endText();
-                y -= lineHeight * 2;
-                String courseInfo = "Description: " + course.getDescription() + " | Instructor: " + course.getInstructor() != "" ? course.getInstructor() : " ";
-                y -= lineHeight * 2;
-                contentStream.beginText();
-                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 14);
-                contentStream.newLineAtOffset(margin, y);
-                contentStream.showText(courseInfo);
-                contentStream.endText();
-                contentStream.beginText();
-                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 14);
-                contentStream.newLineAtOffset(margin, y);
-                contentStream.showText("Comments:");
-                contentStream.endText();
-                y -= lineHeight;
-                List<Commentaire> comments = commentService.getCommentairesByCours(course.getId());
-                contentStream.setFont(PDType1Font.HELVETICA, 12);
-                if(comments.isEmpty()) {
-                    contentStream.beginText();
-                    contentStream.newLineAtOffset(margin, y);
-                    contentStream.showText("No comments.");
-                    contentStream.endText();
-                    y -= lineHeight;
+            int totalCours = coursesList.size();
+            int totalLikes = coursesList.stream().mapToInt(c -> c.getLikes()).sum();
+            List<Commentaire> tousCommentaires = commentService.getAllComments();
+            int totalCommentaires = tousCommentaires.size();
+            PDPage pageTitre = new PDPage();
+            document.addPage(pageTitre);
+            PDRectangle boxTitre = pageTitre.getMediaBox();
+            float largeurPage = boxTitre.getWidth();
+            float hauteurPage = boxTitre.getHeight();
+            PDPageContentStream contenuTitre = new PDPageContentStream(document, pageTitre);
+            String texteTitre = "                             Rapport sur les cours et commentaires";
+            contenuTitre.beginText();
+            contenuTitre.setFont(PDType1Font.HELVETICA_BOLD, 22);
+            float largeurTexteTitre = PDType1Font.HELVETICA_BOLD.getStringWidth(texteTitre) / 1000 * 36;
+            float debutTitreX = (largeurPage - largeurTexteTitre) / 2;
+            float debutTitreY = hauteurPage - 100;
+            contenuTitre.newLineAtOffset(debutTitreX, debutTitreY);
+            contenuTitre.showText(texteTitre);
+            contenuTitre.endText();
+            String dateTexte = "Généré le : " + java.time.LocalDate.now().toString();
+            contenuTitre.beginText();
+            contenuTitre.setFont(PDType1Font.HELVETICA, 14);
+            float largeurDate = PDType1Font.HELVETICA.getStringWidth(dateTexte) / 1000 * 14;
+            float debutDateX = (largeurPage - largeurDate) / 2;
+            contenuTitre.newLineAtOffset(debutDateX, debutTitreY - 50);
+            contenuTitre.showText(dateTexte);
+            contenuTitre.endText();
+            String totalCoursTexte = "Nombre total de cours : " + totalCours;
+            contenuTitre.beginText();
+            contenuTitre.setFont(PDType1Font.HELVETICA, 14);
+            float largeurTotalCours = PDType1Font.HELVETICA.getStringWidth(totalCoursTexte) / 1000 * 14;
+            float debutTotalCoursX = (largeurPage - largeurTotalCours) / 2;
+            contenuTitre.newLineAtOffset(debutTotalCoursX, debutTitreY - 80);
+            contenuTitre.showText(totalCoursTexte);
+            contenuTitre.endText();
+            String totalCommentairesTexte = "Nombre total de commentaires : " + totalCommentaires;
+            contenuTitre.beginText();
+            contenuTitre.setFont(PDType1Font.HELVETICA, 14);
+            float largeurTotalCommentaires = PDType1Font.HELVETICA.getStringWidth(totalCommentairesTexte) / 1000 * 14;
+            float debutTotalCommentairesX = (largeurPage - largeurTotalCommentaires) / 2;
+            contenuTitre.newLineAtOffset(debutTotalCommentairesX, debutTitreY - 100);
+            contenuTitre.showText(totalCommentairesTexte);
+            contenuTitre.endText();
+            String totalLikesTexte = "Nombre total de likes : " + totalLikes;
+            contenuTitre.beginText();
+            contenuTitre.setFont(PDType1Font.HELVETICA, 14);
+            float largeurTotalLikes = PDType1Font.HELVETICA.getStringWidth(totalLikesTexte) / 1000 * 14;
+            float debutTotalLikesX = (largeurPage - largeurTotalLikes) / 2;
+            contenuTitre.newLineAtOffset(debutTotalLikesX, debutTitreY - 120);
+            contenuTitre.showText(totalLikesTexte);
+            contenuTitre.endText();
+            contenuTitre.close();
+            for (Course course : coursesList) {
+                PDPage pageCours = new PDPage();
+                document.addPage(pageCours);
+                PDRectangle boxCours = pageCours.getMediaBox();
+                float largeurCours = boxCours.getWidth();
+                float hauteurCours = boxCours.getHeight();
+                float marge = 50;
+                float y = hauteurCours - marge;
+                PDPageContentStream contenuCours = new PDPageContentStream(document, pageCours);
+                float hauteurEnTete = 40;
+                contenuCours.setNonStrokingColor(0.2f, 0.4f, 0.8f);
+                contenuCours.addRect(marge, y - hauteurEnTete, largeurCours - 2 * marge, hauteurEnTete);
+                contenuCours.fill();
+                contenuCours.beginText();
+                contenuCours.setNonStrokingColor(1, 1, 1);
+                contenuCours.setFont(PDType1Font.HELVETICA_BOLD, 16);
+                contenuCours.newLineAtOffset(marge + 10, y - 30);
+                String texteEnTete = "Cours : " + course.getTitle() + " | Likes : " + course.getLikes();
+                contenuCours.showText(texteEnTete);
+                contenuCours.endText();
+                y = y - hauteurEnTete - 20;
+                contenuCours.beginText();
+                contenuCours.setNonStrokingColor(0, 0, 0);
+                contenuCours.setFont(PDType1Font.HELVETICA, 14);
+                contenuCours.newLineAtOffset(marge, y);
+                String instructeur = (course.getInstructor() != null && !course.getInstructor().isEmpty()) ? course.getInstructor() : "N/A";
+                String texteInfo = "Description : " + course.getDescription() + " | Instructeur : " + instructeur;
+                contenuCours.showText(texteInfo);
+                contenuCours.endText();
+                y = y - 30;
+                contenuCours.beginText();
+                contenuCours.setFont(PDType1Font.HELVETICA_BOLD, 14);
+                contenuCours.newLineAtOffset(marge, y);
+                contenuCours.showText("Commentaires :");
+                contenuCours.endText();
+                y = y - 20;
+                float utilisateurX = marge;
+                float commentaireX = utilisateurX + 110;
+                float dateX = commentaireX + 310;
+                contenuCours.beginText();
+                contenuCours.setFont(PDType1Font.HELVETICA_BOLD, 12);
+                contenuCours.newLineAtOffset(utilisateurX, y);
+                contenuCours.showText("Utilisateur");
+                contenuCours.endText();
+                contenuCours.beginText();
+                contenuCours.setFont(PDType1Font.HELVETICA_BOLD, 12);
+                contenuCours.newLineAtOffset(commentaireX, y);
+                contenuCours.showText("Commentaire");
+                contenuCours.endText();
+                contenuCours.beginText();
+                contenuCours.setFont(PDType1Font.HELVETICA_BOLD, 12);
+                contenuCours.newLineAtOffset(dateX, y);
+                contenuCours.showText("Date");
+                contenuCours.endText();
+                y = y - 15;
+                List<Commentaire> commentaires = commentService.getCommentairesByCours(course.getId());
+                if (commentaires.isEmpty()) {
+                    contenuCours.beginText();
+                    contenuCours.setFont(PDType1Font.HELVETICA, 12);
+                    contenuCours.newLineAtOffset(marge, y);
+                    contenuCours.showText("Aucun commentaire.");
+                    contenuCours.endText();
+                    y = y - 15;
                 } else {
-                    // Write a header row for the comments table
-                    contentStream.beginText();
-                    contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
-                    contentStream.newLineAtOffset(margin, y);
-                    String headerRow = String.format("%-25s %-50s %-20s", "User", "Comment", "Date");
-                    contentStream.showText(headerRow);
-                    contentStream.endText();
-                    y -= lineHeight;
-                    contentStream.setFont(PDType1Font.HELVETICA, 12);
-                    for(Commentaire c : comments) {
-                        if(y < margin) {
-                            contentStream.close();
-                            PDPage newPage = new PDPage();
-                            document.addPage(newPage);
-                            contentStream = new PDPageContentStream(document, newPage);
-                            y = yStart;
+                    for (Commentaire c : commentaires) {
+                        if (y < marge + 50) {
+                            contenuCours.close();
+                            PDPage nouvellePage = new PDPage();
+                            document.addPage(nouvellePage);
+                            contenuCours = new PDPageContentStream(document, nouvellePage);
+                            y = nouvellePage.getMediaBox().getHeight() - marge;
+                            contenuCours.beginText();
+                            contenuCours.setFont(PDType1Font.HELVETICA_BOLD, 12);
+                            contenuCours.newLineAtOffset(utilisateurX, y);
+                            contenuCours.showText("Utilisateur");
+                            contenuCours.endText();
+                            contenuCours.beginText();
+                            contenuCours.setFont(PDType1Font.HELVETICA_BOLD, 12);
+                            contenuCours.newLineAtOffset(commentaireX, y);
+                            contenuCours.showText("Commentaire");
+                            contenuCours.endText();
+                            contenuCours.beginText();
+                            contenuCours.setFont(PDType1Font.HELVETICA_BOLD, 12);
+                            contenuCours.newLineAtOffset(dateX, y);
+                            contenuCours.showText("Date");
+                            contenuCours.endText();
+                            y = y - 15;
                         }
-                        contentStream.beginText();
-                        contentStream.newLineAtOffset(margin, y);
-                        String commentLine = String.format("%-25s %-50s %-20s",
-                                c.getUserEmail(), c.getContenu(), c.getDate());
-                        contentStream.showText(commentLine);
-                        contentStream.endText();
-                        y -= lineHeight;
+                        contenuCours.beginText();
+                        contenuCours.setFont(PDType1Font.HELVETICA, 12);
+                        contenuCours.newLineAtOffset(utilisateurX, y);
+                        contenuCours.showText(c.getUserEmail());
+                        contenuCours.endText();
+                        contenuCours.beginText();
+                        contenuCours.setFont(PDType1Font.HELVETICA, 12);
+                        contenuCours.newLineAtOffset(commentaireX, y);
+                        String texteCommentaire = c.getContenu();
+                        String[] tokens = texteCommentaire.split(" ");
+                        for (int i = 0; i < tokens.length; i++) {
+                            String token = tokens[i];
+                            String tokenNettoye = token.replaceAll("[^a-zA-Z]", "").toLowerCase();
+                            if (isBadWord(tokenNettoye)) {
+                                contenuCours.setNonStrokingColor(1, 0, 0);
+                            } else {
+                                contenuCours.setNonStrokingColor(0, 0, 0);
+                            }
+                            contenuCours.showText(token);
+                            if (i < tokens.length - 1) {
+                                contenuCours.showText(" ");
+                            }
+                        }
+                        contenuCours.endText();
+                        contenuCours.beginText();
+                        contenuCours.setFont(PDType1Font.HELVETICA, 12);
+                        contenuCours.setNonStrokingColor(0, 0, 0);
+                        contenuCours.newLineAtOffset(dateX, y);
+                        contenuCours.showText(c.getDate());
+                        contenuCours.endText();
+                        y = y - 15;
                     }
                 }
-                contentStream.close();
+                contenuCours.close();
             }
             FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Save PDF");
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+            fileChooser.setTitle("Enregistrer le PDF");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers PDF", "*.pdf"));
             File file = fileChooser.showSaveDialog(null);
-            if(file != null) {
+            if (file != null) {
                 document.save(file);
-                showAlert("Success", "PDF exported successfully!");
+                showAlert("Succès", "PDF exporté avec succès !");
             }
-            document.close();
-        } catch(IOException | SQLException ex) {
+        } catch (IOException | SQLException ex) {
             ex.printStackTrace();
-            showAlert("Error", "Error exporting PDF: " + ex.getMessage());
+            showAlert("Erreur", "Erreur lors de l'exportation du PDF : " + ex.getMessage());
+        } finally {
+            try {
+                document.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
+
+    private boolean isBadWord(String token) {
+        if (token == null) {
+            return false;
+        }
+        for (String bad : badWords) {
+            if (token.equals(bad)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
